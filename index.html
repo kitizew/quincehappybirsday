@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 З Днем Народження, Quince!</title>
+    <meta name="description" content="Інтерактивне та магічне привітання з днем народження для Quince з анімаціями, музикою, тортом, іграми та сюрпризами!">
+    
+    <!-- Stylesheets with cache buster -->
+    <link rel="stylesheet" href="css/style.css?v=20260902_6">
+</head>
+<body class="theme-neon">
+
+    <!-- Screen Flash Overlay for Mega Explosion -->
+    <div id="screen-flash" class="screen-flash"></div>
+
+    <!-- CINEMATIC REAL EXPLOSION LAYER (HEART EXPLOSION + FIREBALL) -->
+    <div id="cinema-explosion-layer" class="cinema-explosion-layer hidden">
+        <div class="explosion-fireball-bg"></div>
+        <img src="heartexplo_Fx0zF5Li.gif" id="explosion-gif-heart" class="explosion-gif-heart" alt="Серцевий Вибух">
+        <img src="assets/explosion.gif?v=1" id="explosion-gif-1" class="explosion-gif" alt="Real Explosion">
+        <div class="explosion-shockwave-dome"></div>
+        <div class="explosion-smoke-overlay"></div>
+    </div>
+
+    <!-- Graphic FX Canvas for Confetti, Fireworks & Particles -->
+    <canvas id="fx-canvas"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="brand-badge">
+            <span>🎂</span> Happy Birthday, <span class="target-name">Quince</span>!
+        </div>
+        <div class="nav-actions">
+            <button class="icon-btn" id="music-toggle-btn" title="Увімкнути/вимкнути святкову мелодію">
+                🎵 Музика: Вимк.
+            </button>
+            <button class="icon-btn" id="instant-confetti-btn" style="background: linear-gradient(135deg, #ff0055, #ff7b00); color: #fff; font-weight: 800;" title="Запустити мега-вибух!">
+                💥 МЕГА-БАБАХ! 💣
+            </button>
+            <button class="icon-btn" id="open-edit-btn" title="Персоналізувати привітання">
+                ⚙️ Налаштувати
+            </button>
+        </div>
+    </header>
+
+    <!-- STAGE 1: INTRO MYSTERY GIFT BOX -->
+    <main id="intro-stage" class="intro-stage">
+        <h1 class="intro-title">Для <span class="target-name">Quince</span> надійшла святкова посилка! 🎁</h1>
+        <p class="intro-subtitle">Торкнися коробки, щоб розпакувати сюрприз і розпочати свято...</p>
+
+        <div class="gift-container">
+            <div class="mystery-gift-box" id="mystery-gift-box" title="Натисни щоб відкрити!">
+                <div class="gift-bow"></div>
+                <div class="gift-lid">
+                    <div class="gift-ribbon-v"></div>
+                </div>
+                <div class="gift-body">
+                    <div class="gift-ribbon-v"></div>
+                    <div class="gift-ribbon-h"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+            <div class="gift-hint">
+                🎁 Натисни на коробку для відкриття свята!
+            </div>
+            <button class="action-btn" id="intro-direct-blast-btn" style="background: linear-gradient(135deg, #ff0055, #ff7b00); font-size: 1.1rem; padding: 14px 28px; box-shadow: 0 0 25px rgba(255,0,85,0.7);">
+                💥 АБО ОДРАЗУ ВЛАШТУВАТИ МЕГА-ВИБУХ! 💣
+            </button>
+        </div>
+    </main>
+
+    <!-- STAGE 2: MAIN PARTY HUB (CHAPTER-BASED SWITCHER) -->
+    <div id="main-party-stage" class="main-party-stage hidden">
+
+        <!-- Chapter Tab Bar -->
+        <nav class="chapter-tabs-nav" id="chapter-tabs-nav">
+            <button class="chapter-tab active" data-step="0">
+                <span class="tab-icon">🎉</span>
+                <span class="tab-text">Привітання</span>
+            </button>
+            <button class="chapter-tab" data-step="1">
+                <span class="tab-icon">🎂</span>
+                <span class="tab-text">Торт і Свічки</span>
+            </button>
+            <button class="chapter-tab" data-step="2">
+                <span class="tab-icon">📸</span>
+                <span class="tab-text">Листівки</span>
+            </button>
+            <button class="chapter-tab" data-step="3">
+                <span class="tab-icon">🎈</span>
+                <span class="tab-text">Міні-гра</span>
+            </button>
+            <button class="chapter-tab" data-step="4">
+                <span class="tab-icon">🎬</span>
+                <span class="tab-text">Відео-Сюрприз</span>
+            </button>
+            <button class="chapter-tab mega-tab" data-step="5">
+                <span class="tab-icon">💥</span>
+                <span class="tab-text">МЕГА-ВИБУХ</span>
+            </button>
+        </nav>
+
+        <!-- Slides Container -->
+        <div class="party-slides-container">
+
+            <!-- SLIDE 0: HERO GREETING -->
+            <section class="party-slide active-slide" id="slide-0">
+                <div class="hero-banner">
+                    <div class="hero-tag">✨ Official Birthday Celebration ✨</div>
+                    <h1 class="hero-title">
+                        З Днем Народження,<br>
+                        <span class="target-name">Quince</span>! 🥳👑
+                    </h1>
+                    <div id="hero-age-badge" class="hero-age-badge hidden"></div>
+                    <p class="hero-sender">З найщирішими побажаннями від: <strong class="target-sender">Твоїх друзів</strong> ❤️</p>
+                </div>
+
+                <div class="welcome-card">
+                    <div class="welcome-card-body">
+                        <div class="sparkle-icon">✨ 🌟 ✨</div>
+                        <p class="welcome-text">
+                            Сьогодні весь цей святковий простір створено спеціально для тебе, <strong class="target-name">Quince</strong>! 
+                            Попереду на тебе чекають інтерактивні сюрпризи: загадування бажання біля торта, теплі листівки, святкова міні-гра, секретна скретч-лотерея та <strong>грандіозний фінальний вибух</strong>!
+                        </p>
+                        <button class="action-btn next-step-btn" data-target="1">
+                            🎂 Перейти до святкового торта ➡️
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 1: INTERACTIVE 3D CAKE & CANDLES -->
+            <section class="party-slide" id="slide-1">
+                <div class="party-section cake-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🎂 Загадай бажання & Задмухай свічки!</h2>
+                        <p class="section-desc">Клікай на свічки, дмухай у мікрофон або скористайся кнопкою, щоб загадати найзаповітнішу мрію</p>
+                    </div>
+                    <div class="cake-wrapper" id="cake-wrapper">
+                        <!-- Injected via cake.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: 3D POLAROID MEMORY & WISHES WALL -->
+            <section class="party-slide" id="slide-2">
+                <div class="party-section polaroids-section">
+                    <div class="section-header">
+                        <h2 class="section-title">📸 Інтерактивна Стіна Побажань для <span class="target-name">Quince</span></h2>
+                        <p class="section-desc">Натискай на картки, щоб перевернути їх і прочитати таємні побажання!</p>
+                    </div>
+
+                    <div class="polaroids-grid">
+                        <!-- Card 1 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-inner">
+                                <div class="polaroid-front">
+                                    <div class="polaroid-img">🚀</div>
+                                    <div class="polaroid-caption">Великих Злетів!</div>
+                                </div>
+                                <div class="polaroid-back">
+                                    <div class="polaroid-back-icon">🌟</div>
+                                    <div class="polaroid-back-text">
+                                        Нехай кожен твій сміливий задум втілюється з легкістю, а нові вершини підкорюються на одному диханні!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-inner">
+                                <div class="polaroid-front">
+                                    <div class="polaroid-img" style="background: linear-gradient(135deg, #ffd166, #ff7b00);">💰</div>
+                                    <div class="polaroid-caption">Достатку & Успіху</div>
+                                </div>
+                                <div class="polaroid-back">
+                                    <div class="polaroid-back-icon">💎</div>
+                                    <div class="polaroid-back-text">
+                                        Бажаємо невичерпного потоку можливостей, фінансової свободи та грандіозних досягнень!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-inner">
+                                <div class="polaroid-front">
+                                    <div class="polaroid-img" style="background: linear-gradient(135deg, #06d6a0, #118ab2);">✈️</div>
+                                    <div class="polaroid-caption">Яскравих Подорожей</div>
+                                </div>
+                                <div class="polaroid-back">
+                                    <div class="polaroid-back-icon">🏖️</div>
+                                    <div class="polaroid-back-text">
+                                        Незабутніх мандрівок, нових країн, чудових краєвидів та вражень, від яких захоплює дух!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-inner">
+                                <div class="polaroid-front">
+                                    <div class="polaroid-img" style="background: linear-gradient(135deg, #ff4d6d, #8338ec);">❤️</div>
+                                    <div class="polaroid-caption">Щастя & Любові</div>
+                                </div>
+                                <div class="polaroid-back">
+                                    <div class="polaroid-back-icon">💖</div>
+                                    <div class="polaroid-back-text">
+                                        Щоб поруч завжди були вірні й дорогі серцю люди, а кожен день був сповнений тепла, щирості та радості!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom photo uploader option -->
+                    <div class="photo-uploader-bar">
+                        <label class="icon-btn upload-btn-label" for="photo-upload-input">
+                            🖼️ Завантажити фото для Quince в першу картку
+                        </label>
+                        <input type="file" id="photo-upload-input" accept="image/*" class="hidden">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: BALLOON POPPING MINI-GAME -->
+            <section class="party-slide" id="slide-3">
+                <div class="party-section balloons-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🎈 Міні-гра: Лопай Кульки Щастя!</h2>
+                        <p class="section-desc">Лопай кульки, що злітають вгору, та збирай святкові бали й побажання для Quince!</p>
+                    </div>
+                    <div id="balloon-arena" class="balloon-arena">
+                        <!-- Injected via balloons.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: SECRET SCRATCH VIDEO PRESENTATION -->
+            <section class="party-slide" id="slide-4">
+                <div class="party-section scratch-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🎬 Секретне Відео-Привітання для <span class="target-name">Quince</span></h2>
+                        <p class="section-desc">Потри курсором мишки або пальцем по золотому покриву, щоб відкрити особливу святкову відео-презентацію!</p>
+                    </div>
+                    <div id="scratch-card-wrapper" class="scratch-card-wrapper">
+                        <!-- Injected via scratch.js -->
+                    </div>
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button class="action-btn mega-blast-nav-btn next-step-btn" data-target="5">
+                            💥 Перейти до Фінального Мега-Вибуху! 💣
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: GRAND FINALE MEGA EXPLOSION (HEART EXPLOSION SHOWCASE) -->
+            <section class="party-slide" id="slide-5">
+                <div class="party-section finale-section">
+                    <div class="section-header">
+                        <h2 class="section-title">💥 СЕРЦЕВИЙ МЕГА-ВИБУХ ДЛЯ <span class="target-name">QUINCE</span>! 💥</h2>
+                        <p class="section-desc">Твоя персональна анімація вибуху святкових емоцій та драйву!</p>
+                    </div>
+
+                    <div class="user-explosion-showcase">
+                        <!-- Direct Visible Heart Explosion GIF -->
+                        <div class="gif-frame-glow">
+                            <img src="heartexplo_Fx0zF5Li.gif" id="main-heart-gif" class="hero-heart-explosion-gif" alt="Серцевий Вибух Quince">
+                        </div>
+
+                        <div class="showcase-controls">
+                            <button class="action-btn boom-sound-btn" id="trigger-sound-blast-btn" style="font-size: 1.15rem; padding: 14px 30px; background: linear-gradient(135deg, #ff0055, #ff7b00); box-shadow: 0 0 25px rgba(255, 0, 85, 0.8);">
+                                💣 БАБАХНУТИ ЗІ ЗВУКОМ ТА САЛЮТОМ! 💥
+                            </button>
+                            <button class="action-btn secondary-btn" id="dance-disco-btn">
+                                🪩 Диско-Режим! ✨
+                            </button>
+                        </div>
+
+                        <!-- Grand Trophy Card -->
+                        <div class="grand-trophy-reveal" id="grand-trophy-reveal">
+                            <div class="trophy-crown">👑</div>
+                            <h3 class="trophy-title">
+                                <span class="target-name">QUINCE</span> — АБСОЛЮТНА ЗІРКА СВЯТА! 🌟
+                            </h3>
+                            <p class="trophy-subtitle">
+                                Цей рік буде легендарним, сповненим космічних перемог, драйву та нескінченного щастя! 🚀💖🔥
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Navigation Footer Controls (Prev/Next + Indicator Dots) -->
+        <div class="slide-navigation-bar">
+            <button class="nav-control-btn" id="prev-slide-btn" disabled>
+                ⬅️ Назад
+            </button>
+            
+            <div class="slide-indicator-dots" id="slide-dots">
+                <span class="dot active" data-step="0"></span>
+                <span class="dot" data-step="1"></span>
+                <span class="dot" data-step="2"></span>
+                <span class="dot" data-step="3"></span>
+                <span class="dot" data-step="4"></span>
+                <span class="dot" data-step="5"></span>
+            </div>
+
+            <button class="nav-control-btn" id="next-slide-btn">
+                Вперед ➡️
+            </button>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="party-footer">
+            <p>Зроблено з любов'ю та святковим настроєм спеціально для <span class="target-name">Quince</span>! 💖🎉</p>
+            <p style="margin-top: 6px; font-size: 0.85rem; opacity: 0.7;">Використовуй кнопки навігації або стрілочки ⬅️ / ➡️ на клавіатурі ✨</p>
+        </footer>
+
+    </div>
+
+    <!-- CUSTOMIZATION & EDIT MODAL -->
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="close-modal-btn" id="close-edit-btn">&times;</button>
+            <h2 class="modal-title">⚙️ Персоналізувати свято</h2>
+            
+            <div class="form-group">
+                <label for="input-name">Ім'я іменинника / іменинниці:</label>
+                <input type="text" id="input-name" value="Quince" placeholder="Наприклад: Quince">
+            </div>
+
+            <div class="form-group">
+                <label for="input-sender">Від кого привітання:</label>
+                <input type="text" id="input-sender" placeholder="Наприклад: Найкращі друзі, Сім'я, Колеги">
+            </div>
+
+            <div class="form-group">
+                <label for="input-age">Скільки років виповнюється (необов'язково):</label>
+                <input type="number" id="input-age" placeholder="Наприклад: 20, 25, 30">
+            </div>
+
+            <div class="form-group">
+                <label for="select-theme">Святкова тема оформлення:</label>
+                <select id="select-theme">
+                    <option value="neon">⚡ Неонова вечірка (Neon Party)</option>
+                    <option value="gold">👑 Золота елегантність (Golden Elegance)</option>
+                    <option value="sunset">🌅 Захід сонця (Sunset Glow)</option>
+                    <option value="galaxy">🌌 Космічний день народження (Galaxy)</option>
+                </select>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="action-btn secondary-btn" id="share-link-btn" title="Скопіювати персональне посилання для відправки імениннику">
+                    🔗 Поділитися посиланням
+                </button>
+                <button class="action-btn" id="save-settings-btn">
+                    💾 Зберегти зміни
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts with cache busters -->
+    <script src="js/audio.js?v=20260902_6"></script>
+    <script src="js/confetti.js?v=20260902_6"></script>
+    <script src="js/cake.js?v=20260902_6"></script>
+    <script src="js/balloons.js?v=20260902_6"></script>
+    <script src="js/scratch.js?v=20260902_6"></script>
+    <script src="js/main.js?v=20260902_6"></script>
+</body>
+</html>
